@@ -1,0 +1,178 @@
+:root {
+  --paper: #f6f7fb;
+  --ink: #1a1d2b;
+  --muted: #5a6078;
+  --rule: #d9dcea;
+  --head: #5865f2;
+  --lane-agent: #13a38b;
+  --lane-game: #d9921a;
+  --card: #ffffff;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #15171f;
+    --ink: #eceef6;
+    --muted: #9aa0b8;
+    --rule: #2c3040;
+    --head: #7f8aff;
+    --lane-agent: #2cc7a9;
+    --lane-game: #f0b040;
+    --card: #1c1f2a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 "Schibsted Grotesk", system-ui, sans-serif;
+}
+
+a { color: var(--head); text-underline-offset: 0.2em; }
+a:focus-visible, .buy:focus-visible { outline: 3px solid var(--head); outline-offset: 3px; border-radius: 6px; }
+
+.hash { font: 500 0.8125rem/1 "JetBrains Mono", ui-monospace, monospace; color: var(--muted); }
+
+/* The page is a git log: every section is a commit on a vertical rail. */
+.log {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 16px 32px 16px;
+}
+
+.commit {
+  position: relative;
+  padding: 0 0 56px 44px;
+}
+
+.commit::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 12px;
+  bottom: -12px;
+  width: 2px;
+  background: var(--rule);
+}
+
+.commit:last-child::before { display: none; }
+
+.node {
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--head);
+}
+
+.commit.agent .node { border-color: var(--lane-agent); }
+.commit.game .node { border-color: var(--lane-game); }
+
+.commit.head .node {
+  background: var(--head);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--head) 22%, transparent);
+}
+
+.ref {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font: 600 0.75rem/1.4 "JetBrains Mono", ui-monospace, monospace;
+  color: #fff;
+  background: var(--head);
+  vertical-align: 1px;
+}
+
+.commit.agent .ref { background: var(--lane-agent); }
+.commit.game .ref { background: var(--lane-game); color: #1a1d2b; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0 28px;
+}
+
+.brand img { width: 64px; height: 64px; }
+.brand span { font-weight: 700; font-size: 1.25rem; }
+
+h1 {
+  margin: 0 0 20px;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+}
+
+h2 {
+  margin: 10px 0 10px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0 0 14px; max-width: 62ch; }
+.lede { font-size: 1.25rem; color: var(--muted); max-width: 44ch; }
+
+ul.points { margin: 0; padding-left: 1.1em; max-width: 62ch; }
+ul.points li { margin-bottom: 6px; }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 28px; }
+
+.buy {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: var(--head);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.buy:hover { filter: brightness(1.08); }
+
+.note { color: var(--muted); font-size: 0.9375rem; }
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 6px 0 12px;
+}
+
+.price strong { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+
+footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 48px 60px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 10px; }
+
+/* Legal pages */
+.doc { max-width: 700px; margin: 0 auto; padding: 48px 16px 64px; }
+.doc h1 { font-size: 2.5rem; max-width: none; }
+.doc h2 { font-size: 1.2rem; margin-top: 28px; }
+.doc .back { display: inline-block; margin-bottom: 24px; }
+
+@media (max-width: 520px) {
+  .commit { padding-left: 34px; padding-bottom: 44px; }
+  .brand img { width: 52px; height: 52px; }
+  footer { padding-left: 16px; }
+}
